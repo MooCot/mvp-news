@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 class CommentsCollection extends ResourceCollection
 {
     /**
-     * Преобразовать коллекцию ресурса в массив.
+     * Transform the collection resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
