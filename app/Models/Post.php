@@ -15,7 +15,10 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'id'
+        'name',
+        'link',
+        'amount_upvotes',
+        'author_name', 
     ];
 
     /**

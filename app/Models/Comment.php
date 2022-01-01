@@ -17,7 +17,10 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'id'
+        'author_name',
+        'content',
+        'post_id',
+        'author_name',
     ];
 
     /**
@@ -26,6 +29,7 @@ class Comment extends Model
      * @var array
      */
     protected $hidden = [
+        
     ];
 
     /**
