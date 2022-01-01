@@ -82,4 +82,15 @@ class PostsController extends Controller
     {
         //
     }
+
+    /**
+     * Update the upvote in storage.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function upvotePost()
+    {
+        //
+    }
 }
