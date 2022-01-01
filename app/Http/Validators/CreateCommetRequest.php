@@ -2,6 +2,8 @@
 
 namespace App\Http\Validators;
 
+use Illuminate\Foundation\Http\FormRequest;
+
 class CreateCommetRequest extends ApiFormRequest
 {
     /**
@@ -30,6 +32,7 @@ class CreateCommetRequest extends ApiFormRequest
 
     public function messages()
     {
-
+        return [
+        ];
     }
 }

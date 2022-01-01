@@ -2,6 +2,8 @@
 
 namespace App\Http\Validators;
 
+use Illuminate\Foundation\Http\FormRequest;
+
 class CreatePostRequest extends ApiFormRequest
 {
     /**
@@ -29,6 +31,7 @@ class CreatePostRequest extends ApiFormRequest
 
     public function messages()
     {
-
+        return [
+        ];
     }
 }
