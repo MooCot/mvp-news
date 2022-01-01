@@ -23,8 +23,6 @@ class CreatePostRequest extends ApiFormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'link' => ['required', 'string'],
-            'amount_upvotes' => ['required', 'integer'],
             'author_name' => ['required', 'string'],
         ];
     }

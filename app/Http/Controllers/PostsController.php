@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostsCollection;
 use App\Http\Validators\CreatePostRequest;
+use Illuminate\Support\Facades\Route;
 
 class PostsController extends Controller
 {
@@ -15,7 +16,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return new PostsCollection(Post::paginate());
     }
@@ -30,9 +31,10 @@ class PostsController extends Controller
     {
         $post = new Post();
         $post->name = $request->name;
-        $post->link = $request->link;
         $post->amount_upvotes = 0;
         $post->author_name = $request->author_name;
+        $post->save();
+        $post->link = route('posts.show', ['post' => $post]);
         $post->save();
         return 'succses';
     }
