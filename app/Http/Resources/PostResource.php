@@ -21,7 +21,6 @@ class PostResource extends JsonResource
             'link' => $this->link,
             'amount_upvotes' => $this->amount_upvotes,
             'author_name' => $this->author_name,
-            'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'created_at' => $this->created_at
         ];
     }

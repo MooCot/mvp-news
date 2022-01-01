@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostsCollection;
+use App\Http\Validators\CreatePostRequest;
 
 class PostsController extends Controller
 {
@@ -25,7 +26,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
         $post = new Post();
         $post->name = $request->name;
@@ -56,6 +57,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        Post::findOrFail($post->id);
         $post->name = $request->name;
         $post->link = $request->link;
         $post->amount_upvotes = 0;
@@ -72,6 +74,7 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
+        Post::findOrFail($post->id);
         $post->delete();
         return 'succses';
     }
@@ -84,7 +87,7 @@ class PostsController extends Controller
      */
     public function upvotePost(Post $post)
     {
-
+        Post::findOrFail($post->id);
         $post->amount_upvotes = $post->amount_upvotes++;
         $post->save();
         return 'succses';

@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\CommentsCollection;
+use App\Http\Validators\CreateCommetRequest;
 
 class CommentsController extends Controller
 {
@@ -25,7 +26,7 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCommetRequest $request)
     {
         $comment = new Comment();
         $comment->author_name = $request->author_name;
@@ -55,6 +56,7 @@ class CommentsController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        Comment::findOrFail($comment->id);
         $comment->author_name = $request->author_name;
         $comment->content = $request->content;
         $comment->post_id = $request->post_id;
@@ -70,6 +72,7 @@ class CommentsController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        Comment::findOrFail($comment->id);
         $comment->delete();
         return 'succses';
     }
