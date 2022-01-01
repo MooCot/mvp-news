@@ -38,4 +38,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public static function dropUpvote() 
+    {
+        Post::get()->update(['amount_upvotes' => 0]);
+    }
 }
