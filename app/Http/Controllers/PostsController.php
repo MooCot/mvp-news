@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostsCollection;
 
 class PostsController extends Controller
 {
@@ -14,17 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new PostsCollection(Post::paginate());
     }
 
     /**
@@ -35,7 +27,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->name = $request->name;
+        $post->link = $request->link;
+        $post->amount_upvotes = 0;
+        $post->author_name = $request->author_name;
+        $post->save();
+        return 'succses';
     }
 
     /**
@@ -46,18 +44,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
+        return new PostResource(Post::findOrFail($post->id));
     }
 
     /**
@@ -69,7 +56,12 @@ class PostsController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->name = $request->name;
+        $post->link = $request->link;
+        $post->amount_upvotes = 0;
+        $post->author_name = $request->author_name;
+        $post->save();
+        return 'succses';
     }
 
     /**
@@ -80,7 +72,8 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return 'succses';
     }
 
     /**
@@ -89,8 +82,11 @@ class PostsController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function upvotePost()
+    public function upvotePost(Post $post)
     {
-        //
+
+        $post->amount_upvotes = $post->amount_upvotes++;
+        $post->save();
+        return 'succses';
     }
 }

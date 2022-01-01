@@ -16,5 +16,5 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::resource('comments', CommentsController::class);
-Route::resource('posts', PostsController::class);
+Route::apiResource('comments', CommentsController::class);
+Route::apiResource('posts', PostsController::class);

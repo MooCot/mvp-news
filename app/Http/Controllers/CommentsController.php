@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\CommentsCollection;
 
 class CommentsController extends Controller
 {
@@ -14,17 +16,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new CommentsCollection(Comment::paginate());
     }
 
     /**
@@ -35,7 +27,12 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();
+        $comment->author_name = $request->author_name;
+        $comment->content = $request->content;
+        $comment->post_id = $request->post_id;
+        $comment->save();
+        return 'succses';
     }
 
     /**
@@ -46,18 +43,7 @@ class CommentsController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        return new CommentResource(Comment::findOrFail($comment->id));
     }
 
     /**
@@ -69,7 +55,11 @@ class CommentsController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->author_name = $request->author_name;
+        $comment->content = $request->content;
+        $comment->post_id = $request->post_id;
+        $comment->save();
+        return 'succses';
     }
 
     /**
@@ -80,6 +70,7 @@ class CommentsController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return 'succses';
     }
 }
