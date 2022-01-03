@@ -90,7 +90,7 @@ class PostsController extends Controller
     public function upvotePost(Post $post)
     {
         Post::findOrFail($post->id);
-        $post->amount_upvotes = $post->amount_upvotes++;
+        $post->amount_upvotes = $post->amount_upvotes + 1;
         $post->save();
         return 'succses';
     }
