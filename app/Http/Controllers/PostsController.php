@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostsCollection;
 use App\Http\Validators\CreatePostRequest;
+use App\Http\Validators\UpdatePostRequest;
 use Illuminate\Support\Facades\Route;
 
 class PostsController extends Controller
@@ -57,11 +58,10 @@ class PostsController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
         Post::findOrFail($post->id);
         $post->name = $request->name;
-        $post->link = $request->link;
         $post->amount_upvotes = 0;
         $post->author_name = $request->author_name;
         $post->save();

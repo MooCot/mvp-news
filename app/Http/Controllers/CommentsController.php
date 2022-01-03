@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\CommentsCollection;
 use App\Http\Validators\CreateCommetRequest;
+use App\Http\Validators\UpdateCommetRequest;
 
 class CommentsController extends Controller
 {
@@ -54,12 +55,11 @@ class CommentsController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(UpdateCommetRequest $request, Comment $comment)
     {
         Comment::findOrFail($comment->id);
         $comment->author_name = $request->author_name;
         $comment->content = $request->content;
-        $comment->post_id = $request->post_id;
         $comment->save();
         return 'succses';
     }
