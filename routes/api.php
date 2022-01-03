@@ -18,4 +18,4 @@ use App\Http\Controllers\PostsController;
 
 Route::apiResource('comments', CommentsController::class);
 Route::apiResource('posts', PostsController::class);
-Route::put('posts/upvote', PostsController::class);
+Route::put('posts/upvote', [PostsController::class, 'upvotePost']);
